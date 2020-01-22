@@ -1,0 +1,38 @@
+NEXT COMMIT: #######################################
+- make the circuit greedy sgd to optimize on top of or solution
+----------------------------------------------------
+
+###################################################
+
+A cool idea would be to make a generic "agent" for moving around the search space
+and configuring different policies and move types for given agents. Then evaluate
+how the agents move about the space. Maybe a genetic AI could go from OR_MIP solver
+to the optimal state?
+
+The general idea is now split up into two parts
+    1. make fast greedy algorithms to get to a close to optimal solution ~80000
+    2. make a slow algorithm to carefully take steps in the near-optimal space
+    3. combine search methods to make a general smart algorithm to traverse the space with different tools
+
+I currently have an algorithm that is really good at minimizing accounting cost, with decent choice cost
+I need to create methods to reduce choice cost and combine all methods into one algorithm that can
+    alternate between different search techniques
+
+Another good idea would be to make a slow algorithm that takes smart steps instead of fast steps
+
+Hail Mary Idea:
+    make 2 self learning nns that learn to traverse the space with 1 nn having a bias towards
+    choice, and the other having a bias towards accounting
+
+
+http://akira.ruc.dk/~keld/research/LKH/
+    read about heuristic for TSP and how it applies to santa
+
+lowest choice cost: 78652
+    - alternating sgd_choice and greedy_sgd_1 starting from out/testing_1578532178.csv
+
+lowest accounting cost: 7522
+    - alternating sgd_choice and greedy_sgd_1 starting from out/testing_1578532178.csv
+
+lowest cost: ~ 83615
+    - alternating sgd_choice and greedy_sgd_1 starting from out/testing_1578532178.csv
